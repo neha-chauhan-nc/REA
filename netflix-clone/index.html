@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix - Watch TV Shows Online, Watch Movies Online (Clone)</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== HERO & BANNER ==================== -->
+  <header class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-arc-divider"></div>
+
+    <nav class="nav-bar" role="banner" aria-label="Main Navigation">
+      <div class="nav-logo">
+        <img src="images/logo.svg" alt="Netflix Logo" class="brand-logo" width="128" height="34">
+      </div>
+      <div class="nav-actions">
+        <div class="language-picker-wrap">
+          <svg class="globe-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm5.93 7H10.9a13.3 13.3 0 0 0-.9-4.2A6.5 6.5 0 0 1 13.93 7zm-5.93-5.46c.72 1.25 1.28 3.12 1.45 4.46H6.55c.17-1.34.73-3.21 1.45-4.46zM2.07 7A6.5 6.5 0 0 1 6 2.8 13.3 13.3 0 0 0 5.1 7H2.07zM2.07 9H5.1c.14 1.5.48 3.01.9 4.2A6.5 6.5 0 0 1 2.07 9zm5.93 5.46c-.72-1.25-1.28-3.12-1.45-4.46h2.9c-.17 1.34-.73 3.21-1.45 4.46zm2-1.26c.42-1.19.76-2.7.9-4.2h3.03a6.5 6.5 0 0 1-3.93 4.2z"/>
+          </svg>
+          <select id="headerLanguage" class="language-select" aria-label="Select Language">
+            <option value="en" selected>English</option>
+            <option value="es">Español</option>
+          </select>
+          <svg class="chevron-icon" viewBox="0 0 12 12" width="12" height="12" fill="currentColor">
+            <path d="M2.5 4.5l3.5 3.5 3.5-3.5"/>
+          </svg>
+        </div>
+        <a href="#signin" class="btn-signin" role="button">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-title">Unlimited movies, TV shows, and more</h1>
+      <p class="hero-subtitle">Starts at $7.99. Cancel anytime.</p>
+      
+      <form class="email-signup-form" onsubmit="event.preventDefault(); handleEmailSubmit(this);">
+        <h3 class="form-prompt">Ready to watch? Enter your email to create or restart your membership.</h3>
+        <div class="form-inputs-group">
+          <div class="floating-input-wrap">
+            <input type="email" id="heroEmail" class="floating-input" placeholder=" " required autocomplete="email">
+            <label for="heroEmail" class="floating-label">Email address</label>
+            <span class="input-error-msg" id="heroEmailError">Please enter a valid email address.</span>
+          </div>
+          <button type="submit" class="btn-get-started">
+            <span>Get Started</span>
+            <svg class="arrow-right" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </header>
+
+  <!-- ==================== TRENDING NOW ==================== -->
+  <main class="page-body">
+    <section class="section-container trending-section" aria-labelledby="trendingHeading">
+      <div class="section-header-row">
+        <h2 id="trendingHeading" class="section-title">Trending Now</h2>
+        <div class="carousel-controls">
+          <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="Previous Movies" disabled>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          <button class="carousel-nav-btn next" id="carouselNext" aria-label="Next Movies">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="trending-carousel-wrapper">
+        <div class="trending-track" id="trendingTrack">
+          <!-- 10 Top Ranked Sample Cards -->
+          <div class="ranked-card" data-index="1" data-title="Cyber Odyssey" data-genre="Sci-Fi • Cyberpunk" data-desc="In a neo-metropolis governed by rogue AI, a lone detective uncovers a virtual conspiracy threatening human consciousness.">
+            <span class="rank-number">1</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_1.svg" alt="Cyber Odyssey poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="2" data-title="Chronicles of Eldoria" data-genre="Fantasy • Adventure" data-desc="An ancient magical seal is shattered, forcing estranged elemental guardians to reunite before darkness engulfs the realm.">
+            <span class="rank-number">2</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_2.svg" alt="Chronicles of Eldoria poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="3" data-title="Neon Velocity" data-genre="Action • Supercars" data-desc="Underground drivers pilot experimental hypersonic hypercars across neon highways in a race where survival is the only prize.">
+            <span class="rank-number">3</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_3.svg" alt="Neon Velocity poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="4" data-title="The Deep Silence" data-genre="Mystery • Oceanic" data-desc="A deep-sea submarine crew encounters an ancient bioluminescent structure hidden in the Mariana Trench.">
+            <span class="rank-number">4</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_4.svg" alt="The Deep Silence poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="5" data-title="Solaris Station" data-genre="Space • Drama" data-desc="Astronauts stationed on an orbital facility orbiting a dormant star discover signals originating from inside the sun.">
+            <span class="rank-number">5</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_5.svg" alt="Solaris Station poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="6" data-title="The Last Alchemist" data-genre="Steampunk • Magic" data-desc="In a Victorian city powered by clockwork and arcane metals, an alchemist crafts the ultimate cure at a perilous cost.">
+            <span class="rank-number">6</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_6.svg" alt="The Last Alchemist poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="7" data-title="Midnight Cafe" data-genre="Romance • Slice of Life" data-desc="Open only between midnight and dawn, an eccentric coffee shop becomes the sanctuary for lost souls finding connection.">
+            <span class="rank-number">7</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_7.svg" alt="Midnight Cafe poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="8" data-title="Quantum Rift" data-genre="Time-Travel • Heist" data-desc="A team of master thieves must infiltrate past and future realities to steal an artifact that stabilizes temporal anomalies.">
+            <span class="rank-number">8</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_8.svg" alt="Quantum Rift poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="9" data-title="Whispering Woods" data-genre="Animation • Family" data-desc="Two curious siblings venture into a sacred enchanted forest where woodland spirits teach them the harmony of nature.">
+            <span class="rank-number">9</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_9.svg" alt="Whispering Woods poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+
+          <div class="ranked-card" data-index="10" data-title="Urban Shadows" data-genre="Noir • Crime Thriller" data-desc="In a rain-soaked city of betrayal, a cynical private investigator tracks down the disappearance of a prominent city architect.">
+            <span class="rank-number">10</span>
+            <div class="poster-card-inner">
+              <img src="images/poster_10.svg" alt="Urban Shadows poster" loading="lazy">
+              <div class="card-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MORE REASONS TO JOIN ==================== -->
+    <section class="section-container reasons-section" aria-labelledby="reasonsHeading">
+      <h2 id="reasonsHeading" class="section-title">More Reasons to Join</h2>
+      <div class="reasons-grid">
+        
+        <div class="reason-card">
+          <div class="reason-text">
+            <h3 class="reason-card-title">Enjoy on your TV</h3>
+            <p class="reason-card-desc">Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</p>
+          </div>
+          <div class="reason-icon-wrap">
+            <img src="images/tv.svg" alt="TV Icon" class="reason-svg" width="64" height="64">
+          </div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-text">
+            <h3 class="reason-card-title">Download your shows to watch offline</h3>
+            <p class="reason-card-desc">Save your favorites easily and always have something to watch.</p>
+          </div>
+          <div class="reason-icon-wrap">
+            <img src="images/download.svg" alt="Download Icon" class="reason-svg" width="64" height="64">
+          </div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-text">
+            <h3 class="reason-card-title">Watch everywhere</h3>
+            <p class="reason-card-desc">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+          </div>
+          <div class="reason-icon-wrap">
+            <img src="images/devices.svg" alt="Devices Icon" class="reason-svg" width="64" height="64">
+          </div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-text">
+            <h3 class="reason-card-title">Create profiles for kids</h3>
+            <p class="reason-card-desc">Send kids on adventures with their favorite characters in a space made just for them — free with your membership.</p>
+          </div>
+          <div class="reason-icon-wrap">
+            <img src="images/kids.svg" alt="Kids Icon" class="reason-svg" width="64" height="64">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== FREQUENTLY ASKED QUESTIONS ==================== -->
+    <section class="section-container faq-section" aria-labelledby="faqHeading">
+      <h2 id="faqHeading" class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-list" role="list">
+        
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-1">
+            <span>What is Netflix?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-1" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.</p>
+              <p>You can watch as much as you want, whenever you want without a single commercial – all for one low monthly price. There's always something new to discover and new TV shows and movies are added every week!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-2">
+            <span>How much does Netflix cost?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-2" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from $7.99 to $22.99 a month. No extra costs, no contracts.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-3">
+            <span>Where can I watch?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-3" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
+              <p>You can also download your favorite shows with the iOS, Android, or Windows 10 app. Use downloads to watch while you're on the go and without an internet connection.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-4">
+            <span>How do I cancel?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-4" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-5">
+            <span>What can I watch on Netflix?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-5" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question-btn" aria-expanded="false" aria-controls="faq-ans-6">
+            <span>Is Netflix good for kids?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m-8-8h16" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div id="faq-ans-6" class="faq-answer-collapse" hidden>
+            <div class="faq-answer-content">
+              <p>The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space.</p>
+              <p>Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Secondary Email Form -->
+      <form class="email-signup-form secondary-form" onsubmit="event.preventDefault(); handleEmailSubmit(this);">
+        <h3 class="form-prompt">Ready to watch? Enter your email to create or restart your membership.</h3>
+        <div class="form-inputs-group">
+          <div class="floating-input-wrap">
+            <input type="email" id="footerEmail" class="floating-input" placeholder=" " required autocomplete="email">
+            <label for="footerEmail" class="floating-label">Email address</label>
+            <span class="input-error-msg" id="footerEmailError">Please enter a valid email address.</span>
+          </div>
+          <button type="submit" class="btn-get-started">
+            <span>Get Started</span>
+            <svg class="arrow-right" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <p class="footer-contact">Questions? Call <a href="tel:000-800-919-1743" class="footer-phone-link">000-800-919-1743</a></p>
+      
+      <div class="footer-links-grid">
+        <ul class="footer-col">
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#investor">Investor Relations</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#speedtest">Speed Test</a></li>
+        </ul>
+        <ul class="footer-col">
+          <li><a href="#help">Help Center</a></li>
+          <li><a href="#jobs">Jobs</a></li>
+          <li><a href="#cookies">Cookie Preferences</a></li>
+          <li><a href="#legal">Legal Notices</a></li>
+        </ul>
+        <ul class="footer-col">
+          <li><a href="#account">Account</a></li>
+          <li><a href="#ways-to-watch">Ways to Watch</a></li>
+          <li><a href="#corporate">Corporate Information</a></li>
+          <li><a href="#only-on-netflix">Only on Netflix</a></li>
+        </ul>
+        <ul class="footer-col">
+          <li><a href="#media">Media Center</a></li>
+          <li><a href="#terms">Terms of Use</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#ad-choices">Ad Choices</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-language-wrap">
+        <div class="language-picker-wrap">
+          <svg class="globe-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm5.93 7H10.9a13.3 13.3 0 0 0-.9-4.2A6.5 6.5 0 0 1 13.93 7zm-5.93-5.46c.72 1.25 1.28 3.12 1.45 4.46H6.55c.17-1.34.73-3.21 1.45-4.46zM2.07 7A6.5 6.5 0 0 1 6 2.8 13.3 13.3 0 0 0 5.1 7H2.07zM2.07 9H5.1c.14 1.5.48 3.01.9 4.2A6.5 6.5 0 0 1 2.07 9zm5.93 5.46c-.72-1.25-1.28-3.12-1.45-4.46h2.9c-.17 1.34-.73 3.21-1.45 4.46zm2-1.26c.42-1.19.76-2.7.9-4.2h3.03a6.5 6.5 0 0 1-3.93 4.2z"/>
+          </svg>
+          <select id="footerLanguage" class="language-select" aria-label="Select Language">
+            <option value="en" selected>English</option>
+            <option value="es">Español</option>
+          </select>
+          <svg class="chevron-icon" viewBox="0 0 12 12" width="12" height="12" fill="currentColor">
+            <path d="M2.5 4.5l3.5 3.5 3.5-3.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <p class="footer-brand-country">Netflix Clone Demo • Powered by REA Architecture Evidence</p>
+      <p class="footer-recaptcha">This page is protected by Google reCAPTCHA to ensure you're not a bot.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== PREVIEW MODAL ==================== -->
+  <div class="modal-backdrop" id="movieModal" hidden aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close-btn" id="modalClose" aria-label="Close Preview">&times;</button>
+      <div class="modal-banner" id="modalBanner">
+        <span class="modal-badge">SAMPLE TITLE</span>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalTitle" class="modal-title"></h3>
+        <p id="modalGenre" class="modal-genre"></p>
+        <p id="modalDesc" class="modal-description"></p>
+        <div class="modal-actions">
+          <button class="btn-modal-play">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span>Play Sample</span>
+          </button>
+          <button class="btn-modal-add" aria-label="Add to My List">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

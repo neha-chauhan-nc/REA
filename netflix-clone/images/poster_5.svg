@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <defs>
+    <radialGradient id="vignette-5" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.85)"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="300" fill="url(#dummy)" style="fill: linear-gradient(135deg, #11001c 0%, #220033 50%, #000000 100%)"/>
+  <rect width="200" height="300" fill="url(#vignette-5)"/>
+  
+  <!-- Subtle Grid Lines -->
+  <line x1="0" y1="75" x2="200" y2="75" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="0" y1="150" x2="200" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="0" y1="225" x2="200" y2="225" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+  <!-- Badge -->
+  <rect x="12" y="14" width="76" height="18" rx="4" fill="rgba(0,0,0,0.65)" stroke="#9d4edd" stroke-width="1"/>
+  <text x="50" y="26" fill="#9d4edd" font-family="system-ui, sans-serif" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.5">SAMPLE</text>
+
+  <!-- Central Artwork Icon -->
+  <g transform="translate(0, 5)">
+    <ellipse cx="100" cy="110" rx="65" ry="25" fill="none" stroke="#c77dff" stroke-width="4" transform="rotate(-25 100 110)"/>
+           <circle cx="100" cy="110" r="30" fill="#7b2cbf"/>
+  </g>
+
+  <!-- Overlay gradient for title legibility -->
+  <rect y="170" width="200" height="130" fill="linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)"/>
+
+  <!-- Movie Title and Details -->
+  <text x="14" y="240" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="800" letter-spacing="-0.2">Solaris Station</text>
+  <text x="14" y="258" fill="#9d4edd" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Space • Drama</text>
+  <text x="14" y="280" fill="rgba(255,255,255,0.7)" font-family="system-ui, sans-serif" font-size="9">Watch Now • HD</text>
+</svg>
